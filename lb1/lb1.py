@@ -8,17 +8,22 @@ df['start_date_time'] = pd.to_datetime(df['start_date_time'])
 print(df.shape)
 print(df.describe())
 std = df['RCORR_E'].std()
-print((df[abs(df['RCORR_E']) > 3 * std]).count())
+mean = df['RCORR_E'].mean()
+mask = (abs(df['RCORR_E'] - mean) > 3 * std)
+print((df[mask]).count())
+lower = mean - 3 * std
+upper = mean + 3 * std
 sns.lineplot(data=df, x='start_date_time', y='RCORR_E')
-plt.axhline(3 * std, color='red', linestyle='--')
-plt.ylim(0, 800)
+plt.axhline(upper, color='red', linestyle='--')
+plt.axhline(lower, color='red', linestyle='--')
+plt.ylim(-3, 800)
 plt.show()
 
-print(3681 / 12960) # доля от всех данных
-df_no_anomaly = df[abs(df['RCORR_E']) <= 3 * std]
+d = 1 / 12960
+print(f"{d:.6f}") # доля от всех данных
+df_no_anomaly = df[~mask]
 med = df_no_anomaly['RCORR_E'].median()
 print(med)
-mask = abs(df['RCORR_E']) > 3 * std
 df.loc[mask, 'RCORR_E'] = med
 sns.lineplot(data=df, x='start_date_time', y='RCORR_E')
 plt.show()
