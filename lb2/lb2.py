@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import pairwise_distances
 
-df = pd.read_csv('./lb1/data.csv', sep=';')
+df = pd.read_csv('./lb2/data.csv', sep=';')
 print(df.head())
 df['start_date_time'] = pd.to_datetime(df['start_date_time'])
 print(df.shape)
@@ -33,5 +33,5 @@ for metric in metrics:
     print(f"{metric}: расстояния = {dist[knn]}")
     avg = 0
     for ind in knn:
-        avg += X_train[ind + 1][0] / 4
+        avg += X_train[ind + m][0] / 4
     print(f"среднее предсказанное значение: {avg}")
