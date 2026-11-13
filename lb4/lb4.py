@@ -82,6 +82,10 @@ avg = torch.mean(y)
 baseline_loss = L1(avg.repeat(y.size(0)), y)
 print(f'Baseline L1 Loss: {baseline_loss.item():.4f}')
 
+avg_test = torch.mean(y_test)
+baseline_loss_test = L1(avg_test.repeat(y_test.size(0)), y_test)
+print(f'Baseline L1 Loss (Test): {baseline_loss_test.item():.4f}')
+
 plt.figure(figsize=(10, 6))
 sns.scatterplot(x=X.numpy(), y=y.numpy(), label='Actual', color='blue')
 sns.lineplot(x=X.numpy(), y=pred.numpy(), label='Predicted', color='red')

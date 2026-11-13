@@ -58,3 +58,4 @@ A: -0.3519, B: 0.5917, T: 39.1830, sigma: -0.3806
 L1 Loss: 2.2715
 L1 Loss (All Data): 1.5529
 Baseline L1 Loss: 1.4784
+Baseline L1 Loss (Test): 0.8260
